@@ -15,8 +15,8 @@ def login(role: Optional[str] = "VISITOR", permissions: Optional[List[str]] = Qu
 
 # 🔓 GET is public
 @app.get("/movies", response_model=List[Movie])
-def get_movies(skip: int = 0, limit: int = 10):
-    return movies_db[skip:skip+limit]
+def get_movies(offset: int = 0, limit: int = 10):
+    return movies_db[offset:offset+limit]
 
 # 🔐 POST requires WRITE permission
 @app.post("/movies", response_model=Movie)
