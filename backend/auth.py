@@ -10,7 +10,7 @@ ALGORITHM = "HS256"
 # This tells Swagger to show a simple Bearer token input field
 oauth2_scheme = HTTPBearer()
 
-def create_token(data: dict, expires_delta=timedelta(minutes=10)):
+def create_token(data: dict, expires_delta=timedelta(minutes=1)):
     to_encode = data.copy()
     to_encode.update({"exp": datetime.utcnow() + expires_delta})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
