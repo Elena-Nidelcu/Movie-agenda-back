@@ -5,8 +5,17 @@ from auth import decode_token, check_permission
 from auth import create_token
 from typing import List, Optional
 from fastapi import Query
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Your React app
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers, including Authorization
+)
 
 @app.post("/token")
 def login(role: Optional[str] = "VISITOR", permissions: Optional[List[str]] = Query(default=[])):
